@@ -1,4 +1,4 @@
-# Github
+# CodeForge
 A MERN‑stack web application offering GitHub‑like version control with a custom-built system for managing repositories and commits.
 
 🔥 Features
@@ -37,7 +37,7 @@ npm or yarn
 
 MongoDB connection string
 
-GitHub account (for deployment)
+CodeForge account (for deployment)
 
 Installation
 bash
