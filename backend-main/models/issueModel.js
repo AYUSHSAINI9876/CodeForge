@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const IssueSchema = new Schema({
-  timestamps: true,
   title: {
     type: String,
     required: true,
@@ -21,7 +20,7 @@ const IssueSchema = new Schema({
     ref: "Repository",
     required: true,
   },
-});
+}, { timestamps: true });
 
 const Issue = mongoose.model("Issue", IssueSchema);
 module.exports = Issue;

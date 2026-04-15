@@ -1,0 +1,148 @@
+.create-repo-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 70px);
+  padding: 40px 20px;
+}
+
+.create-repo-card {
+  width: 100%;
+  max-width: 600px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.create-repo-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.create-repo-card p.subtitle {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text-main);
+  font-family: var(--font-family);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.radio-option {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.radio-option:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.radio-option input[type="radio"] {
+  margin-top: 4px;
+  accent-color: var(--accent-color);
+}
+
+.radio-text h4 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.radio-text p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.btn-group {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--panel-border);
+  padding-top: 24px;
+}
+
+.cancel-btn {
+  background: transparent;
+  color: var(--text-main);
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.msg-error {
+  color: var(--danger);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  padding: 10px;
+  background: rgba(248, 81, 73, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(248, 81, 73, 0.3);
+}
+
+.msg-success {
+  color: var(--success);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  padding: 10px;
+  background: rgba(46, 160, 67, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(46, 160, 67, 0.3);
+}

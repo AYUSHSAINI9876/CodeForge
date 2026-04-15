@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../authContext";
 
-import { PageHeader } from "@primer/react/drafts";
-import { Box, Button } from "@primer/react";
 import "./auth.css";
 
 import logo from "../../assets/github-mark-white.svg";
@@ -14,11 +12,13 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { setCurrentUser } = useAuth();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
 
     try {
       setLoading(true);
@@ -37,7 +37,7 @@ const Signup = () => {
       window.location.href = "/";
     } catch (err) {
       console.error(err);
-      alert("Signup Failed!");
+      setErrorMsg(err.response?.data?.message || "Signup Failed!");
       setLoading(false);
     }
   };
@@ -50,13 +50,7 @@ const Signup = () => {
 
       <div className="login-box-wrapper">
         <div className="login-heading">
-          <Box sx={{ padding: 1 }}>
-            <PageHeader>
-              <PageHeader.TitleArea variant="large">
-                <PageHeader.Title>Sign Up</PageHeader.Title>
-              </PageHeader.TitleArea>
-            </PageHeader>
-          </Box>
+          <h1>Join CodeForge</h1>
         </div>
 
         <div className="login-box">
@@ -86,7 +80,7 @@ const Signup = () => {
             />
           </div>
 
-          <div className="div">
+          <div>
             <label className="label">Password</label>
             <input
               autoComplete="off"
@@ -98,20 +92,21 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          
+          {errorMsg && <p style={{color: "var(--danger)", fontSize: "0.9rem", margin: 0, textAlign: "center"}}>{errorMsg}</p>}
 
-          <Button
-            variant="primary"
-            className="login-btn"
+          <button
+            className="login-btn primary-btn"
             disabled={loading}
             onClick={handleSignup}
           >
-            {loading ? "Loading..." : "Signup"}
-          </Button>
+            {loading ? "Loading..." : "Sign Up"}
+          </button>
         </div>
 
         <div className="pass-box">
           <p>
-            Already have an account? <Link to="/auth">Login</Link>
+            Already have an account? <Link to="/auth">Sign In</Link>
           </p>
         </div>
       </div>

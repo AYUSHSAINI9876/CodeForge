@@ -2,27 +2,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../authContext";
 
-import { PageHeader } from "@primer/react/drafts";
-import { Box, Button } from "@primer/react";
 import "./auth.css";
 
 import logo from "../../assets/github-mark-white.svg";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  // useEffect(() => {
-  //   localStorage.removeItem("token");
-  //   localStorage.removeItem("userId");
-  //   setCurrentUser(null);
-  // });
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const { setCurrentUser } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
 
     try {
       setLoading(true);
@@ -40,7 +34,7 @@ const Login = () => {
       window.location.href = "/";
     } catch (err) {
       console.error(err);
-      alert("Login Failed!");
+      setErrorMsg(err.response?.data?.message || "Login Failed!");
       setLoading(false);
     }
   };
@@ -53,13 +47,7 @@ const Login = () => {
 
       <div className="login-box-wrapper">
         <div className="login-heading">
-          <Box sx={{ padding: 1 }}>
-            <PageHeader>
-              <PageHeader.TitleArea variant="large">
-                <PageHeader.Title>Sign In</PageHeader.Title>
-              </PageHeader.TitleArea>
-            </PageHeader>
-          </Box>
+          <h1>Sign In to CodeForge</h1>
         </div>
         <div className="login-box">
           <div>
@@ -74,7 +62,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="div">
+          <div>
             <label className="label">Password</label>
             <input
               autoComplete="off"
@@ -86,19 +74,20 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          
+          {errorMsg && <p style={{color: "var(--danger)", fontSize: "0.9rem", margin: 0, textAlign: "center"}}>{errorMsg}</p>}
 
-          <Button
-            variant="primary"
-            className="login-btn"
+          <button
+            className="login-btn primary-btn"
             disabled={loading}
             onClick={handleLogin}
           >
-            {loading ? "Loading..." : "Login"}
-          </Button>
+            {loading ? "Loading..." : "Sign In"}
+          </button>
         </div>
         <div className="pass-box">
           <p>
-            New to GitHub? <Link to="/signup">Create an account</Link>
+            New to CodeForge? <Link to="/signup">Create an account</Link>
           </p>
         </div>
       </div>

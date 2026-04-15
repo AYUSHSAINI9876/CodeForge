@@ -5,22 +5,16 @@ import "./navbar.css";
 const Navbar = () => {
   return (
     <nav>
-      <Link to="/">
-        <div>
-          <img
-            src="https://www.github.com/images/modules/logos_page/GitHub-Mark.png"
-            alt="GitHub Logo"
-          />
-          <h3>GitHub</h3>
-        </div>
+      <Link to="/" className="nav-left">
+        <img
+          src="https://www.github.com/images/modules/logos_page/GitHub-Mark.png"
+          alt="GitHub Logo"
+        />
+        <h3>CodeForge</h3>
       </Link>
-      <div>
-        <Link to="/create">
-          <p>Create a Repository</p>
-        </Link>
-        <Link to="/profile">
-          <p>Profile</p>
-        </Link>
+      <div className="nav-right">
+        <Link to="/create">Create a Repository</Link>
+        <Link to="/profile">Profile</Link>
       </div>
     </nav>
   );
