@@ -1,8 +1,5 @@
-# React + Vite
+# 🌌 CodeForge Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> **Note:** The primary, modernized documentation for this project has been centralized to the root directory. 
+> 
+> Please refer to the [Main README.md](../README.md) for full project architecture, premium Glassmorphism UI features, local development setups, and deployment instructions.
