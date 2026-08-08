@@ -1,19 +1,17 @@
-import React, {createContext, useState, useEffect, useContext} from 'react';
+import { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext();
 
-export const useAuth = ()=>{
+// eslint-disable-next-line react-refresh/only-export-components -- hook must live alongside its provider
+export const useAuth = () => {
     return useContext(AuthContext);
 }
 
-export const AuthProvider = ({children})=>{
-    const [currentUser, setCurrentUser] = useState(null);
-    useEffect(()=>{
-        const userId = localStorage.getItem('userId');
-        if(userId){
-            setCurrentUser(userId);
-        }
-    }, []);
+export const AuthProvider = ({ children }) => {
+    // Read synchronously so the very first render already knows whether
+    // there's a session — avoids a flash of logged-out UI before an effect
+    // would otherwise fire.
+    const [currentUser, setCurrentUser] = useState(() => localStorage.getItem('userId'));
 
     const value = {
         currentUser, setCurrentUser

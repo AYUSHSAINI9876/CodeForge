@@ -29,7 +29,16 @@ const RepositorySchema = new Schema({
       ref: "Issue",
     },
   ],
+  stars: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      default: [],
+    },
+  ],
 }, { timestamps: true });
+
+RepositorySchema.index({ owner: 1 });
 
 const Repository = mongoose.model("Repository", RepositorySchema);
 module.exports = Repository;

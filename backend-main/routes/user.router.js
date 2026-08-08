@@ -1,13 +1,22 @@
 const express = require("express");
 const userController = require("../controllers/userController");
+const authMiddleware = require("../middleware/authMiddleware");
+const { authorizeSelf } = require("../middleware/authorizeMiddleware");
 
 const userRouter = express.Router();
 
-userRouter.get("/allUsers", userController.getAllUsers);
+// Public
 userRouter.post("/signup", userController.signup);
 userRouter.post("/login", userController.login);
+userRouter.post("/login/verify-otp", userController.verifyLoginOtp);
+userRouter.post("/login/resend-otp", userController.resendLoginOtp);
 userRouter.get("/userProfile/:id", userController.getUserProfile);
-userRouter.put("/updateProfile/:id", userController.updateUserProfile);
-userRouter.delete("/deleteProfile/:id", userController.deleteUserProfile);
+
+// Authenticated
+userRouter.get("/allUsers", authMiddleware, userController.getAllUsers);
+userRouter.get("/me", authMiddleware, userController.getMe);
+userRouter.patch("/user/:id/follow", authMiddleware, userController.toggleFollowUser);
+userRouter.put("/updateProfile/:id", authMiddleware, authorizeSelf, userController.updateUserProfile);
+userRouter.delete("/deleteProfile/:id", authMiddleware, authorizeSelf, userController.deleteUserProfile);
 
 module.exports = userRouter;

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import {useNavigate, useRoutes} from 'react-router-dom'
+import { useRoutes } from 'react-router-dom'
 
 // Pages List
 import Dashboard from "./components/dashboard/Dashboard";
@@ -8,55 +7,37 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import CreateRepo from "./components/repo/CreateRepo";
 import RepoDetail from "./components/repo/RepoDetail";
+import { ProtectedRoute, PublicOnlyRoute } from "./components/common/ProtectedRoute";
 
-// Auth Context
-import { useAuth } from "./authContext";
-
-const ProjectRoutes = ()=>{
-    const {currentUser, setCurrentUser} = useAuth();
-    const navigate = useNavigate();
-
-    useEffect(()=>{
-        const userIdFromStorage = localStorage.getItem("userId");
-
-        if(userIdFromStorage && !currentUser){
-            setCurrentUser(userIdFromStorage);
-        }
-
-        if(!userIdFromStorage && !["/auth", "/signup"].includes(window.location.pathname))
-        {
-            navigate("/auth");
-        }
-
-        if(userIdFromStorage && window.location.pathname=='/auth'){
-            navigate("/");
-        }
-    }, [currentUser, navigate, setCurrentUser]);
-
+const ProjectRoutes = () => {
     let element = useRoutes([
         {
-            path:"/",
-            element:<Dashboard/>
+            path: "/",
+            element: <ProtectedRoute><Dashboard /></ProtectedRoute>
         },
         {
-            path:"/create",
-            element:<CreateRepo/>
+            path: "/create",
+            element: <ProtectedRoute><CreateRepo /></ProtectedRoute>
         },
         {
-            path:"/repo/:id",
-            element:<RepoDetail/>
+            path: "/repo/:id",
+            element: <ProtectedRoute><RepoDetail /></ProtectedRoute>
         },
         {
-            path:"/auth",
-            element:<Login/>
+            path: "/auth",
+            element: <PublicOnlyRoute><Login /></PublicOnlyRoute>
         },
         {
-            path:"/signup",
-            element:<Signup/>
+            path: "/signup",
+            element: <PublicOnlyRoute><Signup /></PublicOnlyRoute>
         },
         {
-            path:"/profile",
-            element:<Profile/>
+            path: "/profile",
+            element: <ProtectedRoute><Profile /></ProtectedRoute>
+        },
+        {
+            path: "/profile/:id",
+            element: <ProtectedRoute><Profile /></ProtectedRoute>
         }
     ]);
 

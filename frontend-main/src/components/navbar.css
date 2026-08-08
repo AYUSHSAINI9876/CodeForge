@@ -19,17 +19,12 @@ nav .nav-left {
   text-decoration: none;
 }
 
-nav .nav-left img {
-  height: 40px;
-  border-radius: 12px;
-  background: white;
-  padding: 4px;
-  box-shadow: var(--yellow-glow);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+nav .nav-left svg {
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-nav .nav-left:hover img {
-  transform: rotate(360deg) scale(1.1);
+nav .nav-left:hover svg {
+  transform: rotate(-12deg) scale(1.08);
 }
 
 nav .nav-left h3 {
@@ -49,6 +44,9 @@ nav .nav-right {
 }
 
 nav .nav-right a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--text-muted);
   font-weight: 600;
   font-size: 0.9rem;
@@ -56,6 +54,14 @@ nav .nav-right a {
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
   position: relative;
+}
+
+nav .nav-right a.active {
+  color: var(--text-main);
+}
+
+nav .nav-right a.active::after {
+  width: 100%;
 }
 
 nav .nav-right a::after {

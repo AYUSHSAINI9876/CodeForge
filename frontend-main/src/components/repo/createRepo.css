@@ -127,22 +127,20 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.msg-error {
-  color: var(--danger);
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-  padding: 10px;
-  background: rgba(248, 81, 73, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(248, 81, 73, 0.3);
-}
+@media (max-width: 640px) {
+  .create-repo-container {
+    padding: 20px 12px;
+  }
 
-.msg-success {
-  color: var(--success);
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-  padding: 10px;
-  background: rgba(46, 160, 67, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(46, 160, 67, 0.3);
+  .create-repo-card {
+    padding: 20px;
+  }
+
+  .btn-group {
+    flex-direction: column-reverse;
+  }
+
+  .btn-group button {
+    width: 100%;
+  }
 }

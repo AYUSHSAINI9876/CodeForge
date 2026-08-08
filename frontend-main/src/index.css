@@ -10,7 +10,12 @@
   --accent-red: #f85149;
   --accent-yellow: #d29922;
   --accent-green: #3fb950;
-  
+
+  /* Semantic aliases used across components */
+  --accent-color: var(--accent-green);
+  --danger: var(--accent-red);
+  --success: var(--accent-green);
+
   /* Gradients */
   --mixture-gradient: linear-gradient(135deg, #f85149 0%, #d29922 50%, #3fb950 100%);
   --red-glow: 0 0 15px rgba(248, 81, 73, 0.3);
@@ -61,6 +66,7 @@ button {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -74,8 +80,8 @@ button:hover {
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
   border-radius: 12px;
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
 
 .primary-btn {

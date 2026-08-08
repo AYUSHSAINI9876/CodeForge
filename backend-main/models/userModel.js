@@ -6,34 +6,54 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    trim: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
+    trim: true,
+    lowercase: true,
   },
   password: {
     type: String,
+    required: true,
+    select: false,
+  },
+  bio: {
+    type: String,
+    default: "",
+    maxlength: 300,
+  },
+  location: {
+    type: String,
+    default: "",
+    maxlength: 100,
+  },
+  website: {
+    type: String,
+    default: "",
+    maxlength: 200,
   },
   repositories: [
     {
-      default: [],
       type: Schema.Types.ObjectId,
       ref: "Repository",
+      default: [],
     },
   ],
   followedUsers: [
     {
-      default: [],
       type: Schema.Types.ObjectId,
       ref: "User",
+      default: [],
     },
   ],
   starRepos: [
     {
-      default: [],
       type: Schema.Types.ObjectId,
       ref: "Repository",
+      default: [],
     },
   ],
 }, { timestamps: true });

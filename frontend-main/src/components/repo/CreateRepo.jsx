@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import apiClient from "../../api/client";
 import Navbar from "../Navbar";
+import { useToast } from "../../context/ToastContext";
 import "./createRepo.css";
 
 const CreateRepo = () => {
@@ -9,44 +10,27 @@ const CreateRepo = () => {
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(true); // true = public, false = private
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
-  
+
   const navigate = useNavigate();
+  const { showSuccess, showError } = useToast();
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    setErrorMsg("");
-    setSuccessMsg("");
-
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      setErrorMsg("Authentication failed. Please sign in again.");
-      return;
-    }
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3002/repo/create", {
+      const res = await apiClient.post("/repo/create", {
         name,
         description,
         visibility,
-        owner: userId,
-        content: [],
-        issues: []
       });
 
-      setSuccessMsg("Repository created successfully!");
-      setLoading(false);
-      
-      // Navigate to dashboard after short delay
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
-      
+      showSuccess("Repository created successfully!");
+      navigate(`/repo/${res.data.repositoryID}`);
     } catch (err) {
       console.error(err);
-      setErrorMsg(err.response?.data?.error || "Failed to create repository.");
+      showError(err.response?.data?.error || "Failed to create repository.");
+    } finally {
       setLoading(false);
     }
   };
@@ -58,9 +42,6 @@ const CreateRepo = () => {
         <div className="create-repo-card">
           <h2>Create a new repository</h2>
           <p className="subtitle">A repository contains all project files, including the revision history.</p>
-          
-          {errorMsg && <div className="msg-error">{errorMsg}</div>}
-          {successMsg && <div className="msg-success">{successMsg}</div>}
 
           <form onSubmit={handleCreate}>
             <div className="form-group">
@@ -72,6 +53,7 @@ const CreateRepo = () => {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. hello-world"
                 required
+                minLength={2}
               />
             </div>
 
@@ -100,7 +82,7 @@ const CreateRepo = () => {
                     <p>Anyone on the internet can see this repository. You choose who can commit.</p>
                   </div>
                 </label>
-                
+
                 <label className="radio-option">
                   <input
                     type="radio"
@@ -117,16 +99,16 @@ const CreateRepo = () => {
             </div>
 
             <div className="btn-group">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="cancel-btn"
                 onClick={() => navigate("/")}
                 disabled={loading}
               >
                 Cancel
               </button>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="primary-btn"
                 disabled={loading}
               >
